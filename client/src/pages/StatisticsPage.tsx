@@ -1,41 +1,56 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BarChart from "@/components/charts/BarChart";
-import PieChart from "@/components/charts/PieChart";
-import { healthDisparitiesData } from "@/lib/statData";
+// Import necessary libraries and components
+import { useState } from "react"; // For keeping track of which category is selected
+import { useQuery } from "@tanstack/react-query"; // For fetching data
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; // UI components
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; // Tabs for navigation
+import BarChart from "@/components/charts/BarChart"; // Bar chart visualization
+import PieChart from "@/components/charts/PieChart"; // Pie chart visualization
+import { healthDisparitiesData } from "@/lib/statData"; // Sample data
 
+// Main StatisticsPage component
 const StatisticsPage = () => {
+  // State to keep track of which category tab is active
   const [activeCategory, setActiveCategory] = useState("all");
 
+  // Fetch statistics data from the API, or use local data if API fails
   const { isLoading, data: statistics } = useQuery({
     queryKey: ["/api/statistics"],
-    // If API is not available, use the local data
-    initialData: healthDisparitiesData
+    initialData: healthDisparitiesData // Fallback data
   });
 
+  // Get all unique categories from our data and add an "all" option
   const categories = ["all", ...new Set(healthDisparitiesData.map(stat => stat.category.toLowerCase()))];
   
+  // Filter statistics based on the selected category
   const filteredStats = activeCategory === "all" 
-    ? statistics 
-    : statistics?.filter(stat => stat.category.toLowerCase() === activeCategory);
+    ? statistics // Show all stats if "all" is selected
+    : statistics?.filter(stat => stat.category.toLowerCase() === activeCategory); // Otherwise show only stats for the selected category
 
   return (
+    // Main container with background color
     <div className="py-12 px-4 bg-[#f8f5f7]">
       <div className="container mx-auto">
+        {/* Page header section */}
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <span className="bg-[#d66ba0]/10 text-[#d66ba0] px-4 py-1 rounded-full text-sm font-medium">DATA-DRIVEN INSIGHTS</span>
-          <h1 className="font-['Montserrat'] text-4xl font-bold my-4 text-[#333333]">Women's Health Disparities Statistics</h1>
+          <span className="bg-[#d66ba0]/10 text-[#d66ba0] px-4 py-1 rounded-full text-sm font-medium">
+            DATA-DRIVEN INSIGHTS
+          </span>
+          <h1 className="font-['Montserrat'] text-4xl font-bold my-4 text-[#333333]">
+            Women's Health Disparities Statistics
+          </h1>
           <p className="text-lg text-[#4b4b4b]">
-            Explore detailed statistics that highlight gender disparities in healthcare research, funding, treatment, and outcomes. 
-            All data is sourced from reputable medical journals and health organizations.
+            Explore detailed statistics that highlight gender disparities in healthcare research, 
+            funding, treatment, and outcomes. All data is sourced from reputable medical journals 
+            and health organizations.
           </p>
         </div>
 
+        {/* Tabs component for category filtering */}
         <Tabs defaultValue="all" className="mb-12" onValueChange={setActiveCategory}>
+          {/* Tab navigation buttons */}
           <div className="flex justify-center mb-8">
             <TabsList className="bg-white">
+              {/* Create a tab button for each category */}
               {categories.map(category => (
                 <TabsTrigger 
                   key={category} 
@@ -48,17 +63,22 @@ const StatisticsPage = () => {
             </TabsList>
           </div>
 
+          {/* Tab content panels - one for each category */}
           {categories.map(category => (
             <TabsContent key={category} value={category} className="space-y-8">
+              {/* Show loading spinner while data is being fetched */}
               {isLoading ? (
                 <div className="text-center py-12">
                   <div className="inline-block w-8 h-8 border-4 border-[#d66ba0] border-t-transparent rounded-full animate-spin"></div>
                   <p className="mt-4 text-[#4b4b4b]">Loading statistics...</p>
                 </div>
               ) : (
+                /* Grid of statistic cards */
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Loop through filtered statistics and create a card for each */}
                   {filteredStats && filteredStats.map((stat) => (
                     <Card key={stat.id} className="overflow-hidden">
+                      {/* Card header with title and value */}
                       <CardHeader className="pb-2">
                         <div className="flex justify-between items-start">
                           <div>
@@ -74,13 +94,18 @@ const StatisticsPage = () => {
                           </div>
                         </div>
                       </CardHeader>
+                      
+                      {/* Card content with chart and description */}
                       <CardContent>
+                        {/* Chart area */}
                         <div className="h-56 bg-[#e9e3e7]/50 mb-4 rounded-md flex items-center justify-center">
+                          {/* Choose which chart to display based on the chartType */}
                           {stat.chartType === "bar" ? (
                             <BarChart />
                           ) : stat.chartType === "pie" ? (
                             <PieChart />
                           ) : (
+                            /* Default chart icon if no chart type specified */
                             <div className="flex items-center justify-center h-full text-[#4b4b4b]">
                               <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -88,7 +113,11 @@ const StatisticsPage = () => {
                             </div>
                           )}
                         </div>
+                        
+                        {/* Statistic description */}
                         <p className="text-[#4b4b4b] mb-4">{stat.description}</p>
+                        
+                        {/* Source information and link */}
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-[#4b4b4b]">Source: {stat.source}</span>
                           {stat.sourceUrl && (
@@ -114,20 +143,37 @@ const StatisticsPage = () => {
           ))}
         </Tabs>
 
+        {/* How to use section */}
         <div className="bg-white p-8 rounded-lg shadow">
-          <h2 className="font-['Montserrat'] text-2xl font-bold mb-4 text-center">How to Use This Data for Advocacy</h2>
+          <h2 className="font-['Montserrat'] text-2xl font-bold mb-4 text-center">
+            How to Use This Data for Advocacy
+          </h2>
           <div className="grid md:grid-cols-3 gap-6">
+            {/* Personal advocacy tip */}
             <div className="border-l-4 border-[#d66ba0] pl-4">
               <h3 className="font-semibold mb-2">Personal Conversations</h3>
-              <p className="text-sm text-[#4b4b4b]">Share these statistics when discussing healthcare experiences with your doctors, family, and friends to raise awareness about systemic issues.</p>
+              <p className="text-sm text-[#4b4b4b]">
+                Share these statistics when discussing healthcare experiences with your doctors, 
+                family, and friends to raise awareness about systemic issues.
+              </p>
             </div>
+            
+            {/* Community advocacy tip */}
             <div className="border-l-4 border-[#9d65c9] pl-4">
               <h3 className="font-semibold mb-2">Community Initiatives</h3>
-              <p className="text-sm text-[#4b4b4b]">Use this data to support grant applications, community health programs, and educational workshops focused on women's health.</p>
+              <p className="text-sm text-[#4b4b4b]">
+                Use this data to support grant applications, community health programs, 
+                and educational workshops focused on women's health.
+              </p>
             </div>
+            
+            {/* Policy advocacy tip */}
             <div className="border-l-4 border-[#4a6fa1] pl-4">
               <h3 className="font-semibold mb-2">Policy Advocacy</h3>
-              <p className="text-sm text-[#4b4b4b]">Reference these statistics in communications with elected officials to advocate for increased research funding and policy changes.</p>
+              <p className="text-sm text-[#4b4b4b]">
+                Reference these statistics in communications with elected officials 
+                to advocate for increased research funding and policy changes.
+              </p>
             </div>
           </div>
         </div>

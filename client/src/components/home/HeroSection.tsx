@@ -1,24 +1,38 @@
+// Import Link component from wouter for navigation
 import { Link } from "wouter";
 
+// The HeroSection is the main banner at the top of our homepage
 const HeroSection = () => {
   return (
+    // Main section with a gradient background
     <section className="bg-gradient-to-r from-pink-50 to-purple-50 py-16">
+      {/* Container to center content and add padding */}
       <div className="container mx-auto px-4">
+        {/* Flex container for responsive layout */}
         <div className="flex flex-col md:flex-row items-center">
+          {/* Left side with text - stacks on top on mobile */}
           <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            {/* Main heading */}
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Empowering Women Through <span className="text-pink-600">Healthcare Equality</span>
             </h1>
+            
+            {/* Subtitle */}
             <p className="text-lg mb-6 text-gray-600">
               Advocating for research, awareness, and equitable access to women's health services.
             </p>
+            
+            {/* Buttons container - stacks on small screens */}
             <div className="flex flex-col sm:flex-row gap-3">
+              {/* Primary button - links to statistics page */}
               <Link 
                 href="/statistics" 
                 className="inline-block bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-5 rounded-md transition-all text-center"
               >
                 Explore the Data
               </Link>
+              
+              {/* Secondary button - links to advocacy page */}
               <Link 
                 href="/advocacy" 
                 className="inline-block bg-white hover:bg-gray-100 text-pink-600 border border-pink-600 font-medium py-2 px-5 rounded-md transition-all text-center"
@@ -27,6 +41,8 @@ const HeroSection = () => {
               </Link>
             </div>
           </div>
+          
+          {/* Right side with image */}
           <div className="md:w-1/2">
             <img 
               src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
@@ -42,4 +58,5 @@ const HeroSection = () => {
   );
 };
 
+// Export the component so it can be used elsewhere
 export default HeroSection;

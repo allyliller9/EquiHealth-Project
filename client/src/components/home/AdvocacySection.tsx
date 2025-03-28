@@ -41,10 +41,8 @@ const AdvocacySection = () => {
                   </li>
                 ))}
               </ul>
-              <Link href="/advocacy#personal">
-                <a className="inline-block mt-6 text-[#9d65c9] font-medium hover:underline">
-                  Read More Tips →
-                </a>
+              <Link href="/advocacy#personal" className="inline-block mt-6 text-[#9d65c9] font-medium hover:underline">
+                Read More Tips →
               </Link>
             </div>
           </div>
@@ -71,10 +69,8 @@ const AdvocacySection = () => {
                   </li>
                 ))}
               </ul>
-              <Link href="/advocacy#community">
-                <a className="inline-block mt-6 text-[#d66ba0] font-medium hover:underline">
-                  Read More Tips →
-                </a>
+              <Link href="/advocacy#community" className="inline-block mt-6 text-[#d66ba0] font-medium hover:underline">
+                Read More Tips →
               </Link>
             </div>
           </div>
@@ -101,10 +97,8 @@ const AdvocacySection = () => {
                   </li>
                 ))}
               </ul>
-              <Link href="/advocacy#policy">
-                <a className="inline-block mt-6 text-[#4a6fa1] font-medium hover:underline">
-                  Read More Tips →
-                </a>
+              <Link href="/advocacy#policy" className="inline-block mt-6 text-[#4a6fa1] font-medium hover:underline">
+                Read More Tips →
               </Link>
             </div>
           </div>
@@ -116,13 +110,11 @@ const AdvocacySection = () => {
           <p className="text-lg mb-6 max-w-3xl mx-auto">
             Download our comprehensive advocacy toolkit with templates, scripts, and strategies for creating meaningful change.
           </p>
-          <Link href="/advocacy#toolkit">
-            <a className="inline-block bg-[#9d65c9] hover:bg-[#9d65c9]/90 text-white font-medium py-3 px-8 rounded-md shadow-md transition-all">
-              Download Free Toolkit 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </a>
+          <Link href="/advocacy#toolkit" className="inline-block bg-[#9d65c9] hover:bg-[#9d65c9]/90 text-white font-medium py-3 px-8 rounded-md shadow-md transition-all">
+            Download Free Toolkit 
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </Link>
         </div>
       </div>
