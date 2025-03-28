@@ -116,13 +116,14 @@ const ResourcesSection = () => {
                 Access our comprehensive database of women's health resources, research papers, and support organizations.
               </p>
             </div>
-            <Link href="/resources">
-              <a className="whitespace-nowrap inline-block bg-[#4a6fa1] hover:bg-[#4a6fa1]/90 text-white font-medium py-3 px-6 rounded-md shadow-md transition-all">
-                Browse Directory 
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </a>
+            <Link 
+              href="/resources"
+              className="whitespace-nowrap inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-md transition-all"
+            >
+              Browse Directory 
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
             </Link>
           </div>
         </div>
