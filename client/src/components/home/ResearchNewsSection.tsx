@@ -1,10 +1,18 @@
 import { Link } from "wouter";
-import { 
-  featuredResearch, 
-  recentResearchNews 
-} from "@/lib/researchData";
+import { featuredResearch, recentResearchNews } from "@/lib/researchData";
 
+/**
+ * ResearchNewsSection Component
+ * 
+ * This component displays the latest research news related to women's health.
+ * It includes a featured article section and a grid of recent research news items.
+ */
 const ResearchNewsSection = () => {
+  /**
+   * Format a date string into a readable format
+   * @param dateString - The date string to format
+   * @returns Formatted date string (e.g., "January 15, 2025")
+   */
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
@@ -13,6 +21,7 @@ const ResearchNewsSection = () => {
   return (
     <section id="research" className="py-16 bg-white">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
           <span className="bg-[#4a6fa1]/10 text-[#4a6fa1] px-4 py-1 rounded-full text-sm font-medium">LATEST UPDATES</span>
           <h2 className="font-['Montserrat'] text-3xl font-bold my-4 text-[#333333]">Women's Health Research News</h2>
@@ -43,8 +52,8 @@ const ResearchNewsSection = () => {
               </p>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-[#4b4b4b]">Published: {formatDate(featuredResearch.publishDate)}</span>
-                <Link href={`/research/${featuredResearch.id}`}>
-                  <a className="text-[#4a6fa1] hover:text-[#4a6fa1]/80 font-medium">Read Full Article →</a>
+                <Link href={`/research/${featuredResearch.id}`} className="text-[#4a6fa1] hover:text-[#4a6fa1]/80 font-medium">
+                  Read Full Article →
                 </Link>
               </div>
             </div>
@@ -56,6 +65,7 @@ const ResearchNewsSection = () => {
           {recentResearchNews.map((news) => (
             <div key={news.id} className="bg-[#f8f5f7] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <div className="p-5">
+                {/* Category Badge */}
                 <span className={`inline-block ${
                   news.category === 'CLINICAL TRIALS' ? 'bg-[#4a6fa1]/10 text-[#4a6fa1]' :
                   news.category === 'BREAKTHROUGH' ? 'bg-[#d66ba0]/10 text-[#d66ba0]' :
@@ -63,20 +73,23 @@ const ResearchNewsSection = () => {
                 } px-3 py-1 rounded-full text-xs font-medium mb-3`}>
                   {news.category}
                 </span>
+                
                 <h3 className="font-['Montserrat'] text-lg font-bold mb-3 text-[#333333] line-clamp-2">{news.title}</h3>
                 <p className="text-[#4b4b4b] text-sm mb-4 line-clamp-3">
                   {news.summary}
                 </p>
+                
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#4b4b4b]">{formatDate(news.publishDate)}</span>
-                  <Link href={`/research/${news.id}`}>
-                    <a className={`${
+                  <Link 
+                    href={`/research/${news.id}`}
+                    className={`${
                       news.category === 'CLINICAL TRIALS' ? 'text-[#4a6fa1]' :
                       news.category === 'BREAKTHROUGH' ? 'text-[#d66ba0]' :
                       'text-[#9d65c9]'
-                    } hover:underline text-sm`}>
-                      Read More
-                    </a>
+                    } hover:underline text-sm`}
+                  >
+                    Read More
                   </Link>
                 </div>
               </div>
@@ -84,14 +97,16 @@ const ResearchNewsSection = () => {
           ))}
         </div>
         
+        {/* "View All" Button */}
         <div className="text-center">
-          <Link href="/research">
-            <a className="inline-block bg-white hover:bg-[#e9e3e7] text-[#4a6fa1] border border-[#4a6fa1] font-medium py-3 px-6 rounded-md shadow-sm transition-all">
-              View All Research News 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </a>
+          <Link 
+            href="/research"
+            className="inline-block bg-white hover:bg-[#e9e3e7] text-[#4a6fa1] border border-[#4a6fa1] font-medium py-3 px-6 rounded-md shadow-sm transition-all"
+          >
+            View All Research News 
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </Link>
         </div>
       </div>
